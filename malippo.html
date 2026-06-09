@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malippo Trading Store - Book & Pick</title>
+  <style>
+body {
+  background-color: #00C4CC;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 15px;
+  color: #333;
+}
+
+h1, h2 {
+  color: white;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+
+    
+   .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+    
+    /* Glass Card Style */
+   .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+   .tagline { text-align: center; opacity: 0.9; margin-bottom: 20px; }
+    
+    /* Product List */
+
+.product, .cart, form {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+    
+   .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .qty-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: #00C4CC;  /* Teal buttons on white card */
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.qty-btn:hover {
+  background: #00a8b0;  /* Darker teal on hover */
+}
+
+.qty-input {
+  width: 40px;
+  text-align: center;
+  background: #f5f5f5;  /* Light gray input */
+  border: 1px solid #00C4CC;  /* Teal border */
+  border-radius: 6px;
+  color: #333;  /* DARK TEXT ON LIGHT BG */
+  padding: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+    
+    /* Cart Summary */
+   .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+   .total-final { 
+      font-size: 24px; 
+      font-weight: bold; 
+      color: #FF6B00;
+      border-top: 2px solid rgba(255, 255, 255, 0.2);
+      padding-top: 15px;
+    }
+    
+    /* Inputs */
+    input, select {
+  width: 91%;
+  padding: 15px;
+  margin: 8px 0;
+  border: 1px solid #00C4CC;  /* Teal border */
+  border-radius: 12px;
+  background: white;  /* White input */
+  color: #333;  /* Dark text */
+  font-size: 16px;
+}
+
+input::placeholder { 
+  color: #999;  /* Gray placeholder */
+}
+    /* Button */
+    
+   .book-btn {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 12px;
+      background: rgb( 0 0 0);
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+   .book-btn:disabled {
+      background: rgba(255, 255, 255, 0.2);
+      opacity: 0.5;
+    }
+    
+   .footer {
+      text-align: center;
+      font-size: 12px;
+      opacity: 0.6;
+      margin-top: 30px;
+    }
+    .product-search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.product-search input,.product-search select {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.9);
+  color: #333;
+  font-size: 14px;
+}
+
+.product-scroll {
+  max-height: 400px; /* Fixed height */
+  overflow-y: auto; /* Scroll inside box */
+  padding-right: 5px; /* Space for scrollbar */
+}
+
+/* Custom scrollbar for teal theme */
+.product-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.product-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.5);
+  border-radius: 3px;
+}
+
+.product-info {
+  flex: 1;
+  margin-right: 10px; /* Space before buttons */
+}
+
+.product {
+  background: white;
+  border-radius: 12px;
+  padding: 12px 15px;
+  margin: 8px 0;
+  display: flex; /* This puts buttons left */
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  gap: 12px; /* Space between buttons and text */
+}
+
+.product-info h3 {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  color: #333;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0; /* Buttons don't squish */
+}
+
+.product-info p {
+  min-width: 0; /* Text wraps properly */
+  margin: 0;
+  color: #00C4CC;
+  font-weight: bold;
+   font-size: 14px;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  color: Black;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: white;
+  opacity: 0.9;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+/* Desktop: Date + Time side by side */
+.date-time-row {
+  display: flex;
+  gap: 12px;
+}
+
+.date-time-row .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+/* Mobile: Stack them */
+@media (max-width: 480px) {
+  .date-time-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+input[type="date"], select {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #00C4CC;
+  border-radius: 12px;
+  background: white;
+  color: #333;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- SECTION 1: HERO -->
+    <div class="glass">
+      <h1>MALIPPO TRADING STORE</h1>
+      <p class="tagline">Order on Phone. Pick in 2 Hours. Skip the Line.</p>
+      <p style="text-align:center; font-size:14px; opacity:0.8;">Kalisizo - Town, Masaka.</p>
+    </div>
+    <!-- SECTION 2: PRODUCTS -->
+<div class="glass">
+<h2>1. Choose Products</h2>
+
+<!-- START: PASTE HERE -->
+<div class="product-search">
+  <input type="text" id="searchInput" placeholder="Search product name..." onkeyup="filterProducts()">
+  <select id="categoryFilter" onchange="filterProducts()">
+    <option value="all">All Categories</option>
+    <option value="home">Home Care</option>
+    <option value="personal">Personal Care</option>
+    <option value="food">Food & Beverages</option>
+  </select>
+</div>
+<!-- END: PASTE HERE -->
+
+<div id="productList" class="product-scroll"></div>
+</div>
+
+    <!-- SECTION 3: CART -->
+    <div class="glass">
+      <h2>2. Order Summary</h2>
+      <div id="cartItems"></div>
+      <div class="total-row total-final">
+        <span>Total:</span>
+        <span id="totalAmount">0 UGX</span>
+      </div>
+    </div>
+
+    <!-- SECTION 4: BOOKING -->
+    <form class="glass" onsubmit="sendToWhatsApp(event)">
+  <h2>3. Book Pickup</h2>
+      <div class="form-group">
+        <label>Full Name</label>
+      <input type="text" id="customerName" placeholder="Enter Your Name" required>
+      </div>
+          <div class="form-group">
+        <label>Phone Number</label>
+      <input type="tel" id="customerPhone" placeholder="Enter Your Phone Number: 07XX XXX XXX" required>
+      </div>
+      
+      <!-- Date + Time in balanced grid -->
+<div class="date-time-row">
+  <div class="form-group">
+    <label>Select Pickup Date</label>
+    <input type="date" id="pickupDate" required>
+  </div>
+  <div class="form-group">
+    <label>Select Pickup Time</label>
+    <select id="pickupTime" required>
+      <option value="">Select time...</option>
+      <option value="10:00 AM">10:00 AM</option>
+      <option value="11:00 AM">11:00 AM</option>
+      <option value="12:00 PM">12:00 PM</option>
+      <option value="2:00 PM">2:00 PM</option>
+      <option value="3:00 PM">3:00 PM</option>
+      <option value="4:00 PM">4:00 PM</option>
+      <option value="7:00 PM">7:00 PM</option>
+    </select>
+  </div>
+</div>
+
+   <button class="book-btn" id="bookBtn" type="submit">
+ Send Order to WhatsApp
+</button>
+</form>
+     
+    <p class="footer">Powered by ©#MeroTech | Kalisizo</p>
+  </div>
+
+  <script>
+let cart = {}; 
+    // DAY 19 UPGRADE: Products with categories
+    const products = [
+  // HOME CARE CATEGORY
+  { name: "Omo 1kg", price: 13000, category: "home" },
+  { name: "Omo 500g", price: 7000, category: "home" },
+  { name: "Omo bleach 700ml", price: 11000, category: "home" },
+  { name: "SLT Powder 1kg", price: 11000, category: "home" },
+  
+  // PERSONAL CARE CATEGORY  
+  { name: "Geisha Core 200g", price: 7000, category: "personal" },
+  { name: "Geisha Naturals 200g", price: 5000, category: "personal" },
+  { name: "VPJ 240ml", price: 9500, category: "personal" },
+  { name: "Pepsodent 150g", price: 5000, category: "personal" },
+  // Add 100 more products here - same format
+];
+
+function renderProducts(filteredProducts = products) {
+  const listDiv = document.getElementById('productList');
+  listDiv.innerHTML = '';
+  
+  if(filteredProducts.length === 0) {
+    listDiv.innerHTML = '<p style="text-align:center;color:white;">No products found</p>';
+    return;
+  }
+  
+  // Load saved cart first
+  const savedCart = JSON.parse(localStorage.getItem('malippoCart')) || {};
+  
+  // Group by category
+  const grouped = {};
+  filteredProducts.forEach(item => {
+    if(!grouped[item.category]) grouped[item.category] = [];
+    grouped[item.category].push(item);
+  });
+  
+  for(const category in grouped) {
+    const catName = category === 'home'? 'HOME CARE' : 
+                    category === 'personal'? 'PERSONAL CARE' : 'FOOD';
+    
+    listDiv.innerHTML += `<h3 style="color:white;margin:15px 0 5px 5px;font-size:14px;opacity:0.8;">${catName}</h3>`;
+    
+    grouped[category].forEach(item => {
+      const savedQty = savedCart[item.name] || 0; // GET SAVED QTY
+      listDiv.innerHTML += `
+        <div class="product" data-name="${item.name}" data-price="${item.price}">
+          <div class="product-info">
+            <h3>${item.name}</h3>
+            <p>${item.price.toLocaleString()} UGX</p>
+          </div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="updateQty(this, -1)">-</button>
+            <input type="number" class="qty-input" value="${savedQty}" min="0" oninput="updateQtyFromInput(this)">
+            <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+}
+
+function filterProducts() {
+  const searchText = document.getElementById('searchInput').value.toLowerCase();
+  const category = document.getElementById('categoryFilter').value;
+  
+  const filtered = products.filter(item => {
+    const matchesSearch = item.name.toLowerCase().includes(searchText);
+    const matchesCategory = category === 'all' || item.category === category;
+    return matchesSearch && matchesCategory;
+  });
+  
+  renderProducts(filtered);
+}
+
+// Run when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // 1. Load cart from storage FIRST
+  const savedCart = localStorage.getItem('malippoCart');
+  if(savedCart) {
+    cart = JSON.parse(savedCart);
+  }
+  
+  // 2. Render products - this now puts saved qty in boxes
+  renderProducts();
+  
+  // 3. Update cart + total AFTER products exist
+  updateCartDisplay(); 
+  
+  // 4. Set date
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('pickupDate').value = today;
+  document.getElementById('pickupDate').min = today;
+});
+
+
+
+function updateQty(button, change) {
+  const productDiv = button.closest('.product');
+  const qtyInput = productDiv.querySelector('.qty-input');
+  const productName = productDiv.getAttribute('data-name');
+  const productPrice = parseInt(productDiv.getAttribute('data-price'));
+  
+  let currentQty = parseInt(qtyInput.value) || 0;
+  currentQty += change;
+  
+  if(currentQty < 0) currentQty = 0;
+  qtyInput.value = currentQty; // Update box immediately
+  
+  // Update cart object
+  if(currentQty === 0) {
+    delete cart[productName];
+  } else {
+    cart[productName] = currentQty;
+  }
+  
+  updateCartDisplay(); // Update Order Summary
+  localStorage.setItem('malippoCart', JSON.stringify(cart)); // Save instantly
+}
+
+function updateCartDisplay() {
+  const cartDiv = document.getElementById('cartItems');
+  const totalDiv = document.getElementById('totalAmount'); // FIXED: matches your HTML
+  
+  if(!totalDiv) {
+    alert('ERROR: Cannot find totalAmount in HTML');
+    return;
+  }
+  
+  cartDiv.innerHTML = '';
+  let total = 0;
+  
+  for(const productName in cart) {
+    const qty = parseInt(cart[productName]) || 0;
+    if(qty <= 0) continue;
+    
+    const productData = products.find(p => p.name === productName);
+    if(!productData) continue;
+    
+    const subtotal = productData.price * qty;
+    total += subtotal;
+    
+    cartDiv.innerHTML += `
+      <div class="cart-item">
+        <span>${productName} x${qty}</span>
+        <span>${subtotal.toLocaleString()} UGX</span>
+      </div>
+    `;
+  }
+  
+  if(Object.keys(cart).length === 0) {
+    cartDiv.innerHTML = '<p style="text-align:center;opacity:0.7;color:white;">No items selected</p>';
+  }
+  
+  totalDiv.textContent = total.toLocaleString() + ' UGX';
+}
+    
+    function sendToWhatsApp(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('customerName').value;
+  const phone = document.getElementById('customerPhone').value;
+  const date = document.getElementById('pickupDate').value;
+  const time = document.getElementById('pickupTime').value;
+  
+  if(Object.keys(cart).length === 0) {
+    alert('Please select at least 1 product');
+    return;
+  }
+  
+  let message = `*NEW ORDER - Malippo Trading Store*\n\n`;
+  message += `*Customer:* ${name}\n`;
+  message += `*Phone:* ${phone}\n`;
+  message += `*Pickup:* ${date} at ${time}\n\n`;
+  message += `*ORDER DETAILS:*\n`;
+  
+  let total = 0;
+  
+  // FIXED: Use same logic as updateCartDisplay
+  for(const productName in cart) {
+    const qty = parseInt(cart[productName]) || 0; // Force to number
+    if(qty <= 0) continue;
+    
+    // Find product - bulletproof match
+    const productData = products.find(p => p.name.trim().toLowerCase() === productName.trim().toLowerCase());
+    
+    if(!productData) continue; // Skip if not found
+    
+    const subtotal = productData.price * qty;
+    total += subtotal;
+    
+    message += `• ${productName} x${qty} = ${subtotal.toLocaleString()} UGX\n`;
+  }
+  
+  message += `\n*TOTAL: ${total.toLocaleString()} UGX*\n\n`;
+  message += `Please prepare this order.`;
+  
+  const malippoNumber = "256704880448"; // Replace with real number
+  const whatsappUrl = `https://wa.me/${malippoNumber}?text=${encodeURIComponent(message)}`;
+         
+  localStorage.removeItem('malippoCart'); // Clear saved cart after order
+  cart = {}; // Clear current cart
+  renderProducts(); // Reset all qty to 0
+  
+  window.open(whatsappUrl, '_blank');
+}
+    
+    // Init
+    updateCartDisplay();
+  </script>
+</body>
+</html>
