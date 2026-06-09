@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5QV62N87XF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5QV62N87XF');
+</script>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - #MeroTech Web Design Uganda</title>
+  <meta name="description" content="See MeroTech websites: Lodges, shops, restaurants. 150K package. Kampala, Uganda.">
+  <meta name="theme-color" content="#202124">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+  <style>
+@keyframes slideInLeft {
+  0% { 
+    transform: translateX(-100%); 
+    opacity: 0; 
+  }
+  100% { 
+    transform: translateX(0); 
+    opacity: 1; 
+  }
+}
+
+.animate-title {
+  animation: slideInLeft 0.8s ease-out forwards;
+  opacity: 0; /* Start invisible */
+}
+</style>
+</head>
+<body style="margin:0; background-color: #202124; padding: 20px; font-family: Arial; color: #e8eaed;">
+
+  
+  <img src="portfolio-holo.jpg" alt="MeroTech Portfolio" style="width: 100%; max-width: 400px; display: block; margin: 0 auto; border-radius: 8px;" />
+  
+    <!-- FIXED: Header now at TOP and animates -->
+    <h1 class="animate-title" 
+        style="color: #FFF; margin: 0 0 1rem 0; text-shadow: 2px 2px 4px #000; text-align: center;">
+      Video Ad Portfolio
+    </h1>
+
+  <nav style="text-align: center; margin: 5px 0; background: #303134; padding: 10px; border-radius: 8px; border: 1px solid #5f6368;">
+    <a href="/" style="color: #8ab4f8; margin: 0 8px; text-decoration: none;">Home</a>
+    <a href="/about.html" style="color: #8ab4f8; margin: 0 8px; text-decoration: none;">About</a>
+    <a href="/services.html" style="color: #8ab4f8; margin: 0 8px; text-decoration: none;">Services</a>
+    <a href="/portfolio.html" style="color: #8ab4f8; margin: 0 8px; text-decoration: none; border-bottom: 3px solid #00FF00; padding-bottom: 3px; font-weight: bold;">Portfolio</a>
+    <a href="/contact.html" style="color: #8ab4f8; margin: 0 8px; text-decoration: none;">Contact</a>
+  </nav>
+
+<!-- Video Ads Section - REPLACES THE CYAN BOX -->
+<section style="padding: 1rem; max-width: 500px; margin: 2rem auto;">
+  <div style="text-align: center; margin-bottom: 1rem;">
+    <h2 style="color: #8ab4f8; margin: 0;">🎬 Video Ads That Sell</h2>
+    <p style="color: #bdc1c6; margin: 0.5rem 0 0 0;">
+      Sample 15sec ad. I create + run these on Facebook/Instagram.
+    </p>
+  </div>
+  
+  <div style="border-radius: 12px; overflow: hidden; border: 2px solid #00FF00; margin-bottom: 1rem;">
+    <iframe width="100%" 
+            style="aspect-ratio: 9/16; display: block;" 
+            src="https://www.youtube.com/embed/Zr3Tuumwyq4?rel=0&modestbranding=1" 
+            frameborder="0" 
+            allowfullscreen>
+    </iframe>
+  </div>
+  
+  <div style="background: #303134; padding: 1rem; border-radius: 12px; border: 1px solid #5f6368; margin-bottom: 1rem;">
+    <p style="color: #FFF; font-size: 18px; font-weight: bold; margin: 0; text-align: center;">
+      15-Second Video Ad: <span style="color: #00FF00;">150,000 UGX</span>
+    </p>
+    <p style="color: #9aa0a6; font-size: 14px; margin: 0.5rem 0 0 0; text-align: center;">
+      400K Full Package: Site + Logo + Video + Ads Management
+    </p>
+  </div>
+  
+  <div style="display: flex; gap: 0.5rem; flex-direction: column;">
+    <!-- 150K Button -->
+<a href="#" 
+   onclick="openWhatsApp('Video Ad', '150K', 'https://wa.me/256765780487?text=I%20want%2015sec%20video%20ad%20for%20150K', this); return false;"
+   style="background: #00FF00; color: #000; padding: 14px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; display: block; margin-bottom: 0.5rem;">
+   Order Video Ad - 150K
+</a>
+
+<!-- 400K Button -->
+<a href="#" 
+   onclick="openWhatsApp('Full Package', '400K', 'https://wa.me/256765780487?text=I%20want%20400K%20package:%20Site%20+%20Logo%20+%20Video', this); return false;"
+   style="background: #8ab4f8; color: #000; padding: 14px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; display: block;">
+   Order Full Package - 400K
+</a>
+    
+  </div>
+</section>
+
+    <div style="text-align: center; margin-top: 25px;">
+      <a href="https://wa.me/256765780487?text=Hi%20MeroTech%2C%20I%20saw%20your%20portfolio.%20Build%20mine%20for%20150K" style="background-color: #25D366; color: white; padding: 14px 30px; border-radius: 8px; text-decoration: none; font-weight: 900; font-size: 16px; display: inline-block;">💬 Build My Site</a>
+    </div>
+    
+    <script>
+// Track + WhatsApp + Send you a ping
+function openWhatsApp(service, price, link, btn) {
+  // 1. Change button UI
+  btn.innerText = "Opening WhatsApp...";
+  btn.style.background = "#FFA500";
+  
+  // 2. TRACKING: Log to console + send you WhatsApp notice
+  let time = new Date().toLocaleTimeString();
+  console.log(`LEAD: ${service} - ${price} - ${time}`);
+  
+  // 3. SILENT PING TO YOU: Opens WhatsApp to yourself first
+  let trackingMsg = `MERO TECH ALERT: Someone clicked ${service} ${price} at ${time}. Expect WhatsApp msg soon.`;
+  let trackerLink = `https://wa.me/256765780487?text=${encodeURIComponent(trackingMsg)}`;
+  
+  // Open tracking notice to YOU first, then client WhatsApp
+  window.open(trackerLink, '_blank');
+  
+  // 4. After 1sec, open client's WhatsApp
+  setTimeout(() => {
+    window.open(link, '_blank');
+  }, 1000);
+  
+  return false;
+}
+</script>
+    </body>
+    
+  <footer style="text-align: center; margin-top: 30px; font-size: 12px; color: #9aa0a6;">
+    <p>© 2026 #MeroTech - Web Design Uganda</p>
+  </footer>
+  </html>
